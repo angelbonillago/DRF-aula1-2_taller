@@ -1,13 +1,15 @@
 from rest_framework import serializers
 from .models import Todo
 
-
+#usando model_serializer
 class TodoSerializador(serializers.ModelSerializer):
     class Meta:
         model=Todo
         fields = '__all__' #para todos los campos.
         read_only_fields = ('created_at', 'done_at', 'updated_at', 'deleted_at',)
 
+
+#usando solo serializer
 class TestTodoSerializer(serializers.Serializer):
     id=serializers.IntegerField()
     title = serializers.CharField(max_length = 100)
