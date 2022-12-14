@@ -133,5 +133,49 @@ class CreateTodoMixin:
             return {}
 
 
-class TodoMixinsViewSet(CreateTodoMixin,generics.GenericAPIView):
-    def post():
+
+class ListModelMixin:
+    """
+    List a queryset.
+    """
+    def listar_todo(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Mixins creado
+
+
+
+
+
+
+
+class TodoMixinsViewSet(ListModelMixin,generics.GenericAPIView):
+    queryset=Todo.objects.all()
+    serializer_class =TodoSerializador
+
+    def get(self, request, *args, **kwargs):
+        return self.listar_todo(request, *args, **kwargs)

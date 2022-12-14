@@ -1,5 +1,5 @@
 from rest_framework import routers
-from .api import TodoViewSet,DeleteAllTodo,TodoViewSetCustom,TestViewSet
+from .api import TodoViewSet,DeleteAllTodo,TodoViewSetCustom,TestViewSet,TodoMixinsViewSet
 from django.urls import path
 
 from rest_framework_simplejwt.views import (
@@ -15,6 +15,8 @@ router.register('api/todos/filtros', TodoViewSet, 'todos')  #estamos creando la 
 #router.register('api/test', TestViewSet, 'test') 
 
 router.register('api/todos/todoviewset', TodoViewSetCustom, 'todoviewset') 
+
+router.register('api/mixin',TodoMixinsViewSet,'mixin')
 
 urlpatterns = router.urls #todas las rutas
 
