@@ -1,11 +1,12 @@
 from .models import Todo
-from rest_framework import viewsets,permissions
+from rest_framework import viewsets,permissions,generics
 from .serializers import TodoSerializador,TestTodoSerializer
 from rest_framework import status
 from .pagination import StandardResultSetPagination
 from django.shortcuts import get_object_or_404
 #from django_filters.filters import filters
 from rest_framework import filters
+from rest_framework.settings import api_settings
 
 
 from rest_framework.response import Response
@@ -109,3 +110,28 @@ class DeleteAllTodo(APIView):
         serializer = TodoSerializador(todos, many = True)
         return Response(serializer.data)
 
+
+#mixins
+class CreateTodoMixin:
+    """
+    Create a model instance.
+    """
+    def crear_modelo_Todo(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def get_success_headers(self, data):
+        try:
+            return {'Location': str(data[api_settings.URL_FIELD_NAME])}
+        except (TypeError, KeyError):
+            return {}
+
+
+class TodoMixinsViewSet(CreateTodoMixin,generics.GenericAPIView):
+    def post():
