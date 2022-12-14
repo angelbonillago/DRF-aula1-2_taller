@@ -16,15 +16,19 @@ router.register('api/todos/filtros', TodoViewSet, 'todos')  #estamos creando la 
 
 router.register('api/todos/todoviewset', TodoViewSetCustom, 'todoviewset') 
 
-router.register('api/mixin',TodoMixinsViewSet,'mixin')
-
 urlpatterns = router.urls #todas las rutas
+urlpatterns+=[
+    #path('api/todos/mixins',TodoMixinsViewSet.as_view(),name="mixins"),  
+]
+
+
+
 
 """ urlpatterns+=[  
     path('api/todos/deleteAll',DeleteAllTodo.as_view(),name="deleteAll"),
     path('api/todos/geteAll',DeleteAllTodo.as_view(),name="geteAll"),
 
-
+path('api/todos/gete-All',DeleteAllTodo.as_view(),name="geteAll"),
     #modelviewset
     #path('api/todos/todocustom',TodoViewSetCustom,'todocustom')
 

@@ -110,7 +110,6 @@ class DeleteAllTodo(APIView):
         serializer = TodoSerializador(todos, many = True)
         return Response(serializer.data)
 
-
 #mixins
 class CreateTodoMixin:
     """
@@ -132,8 +131,6 @@ class CreateTodoMixin:
         except (TypeError, KeyError):
             return {}
 
-
-
 class ListModelMixin:
     """
     List a queryset.
@@ -149,33 +146,16 @@ class ListModelMixin:
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Mixins creado
+class TodoMixinsViewSet(ListModelMixin,CreateTodoMixin,generics.GenericAPIView):
 
-
-
-
-
-
-
-class TodoMixinsViewSet(ListModelMixin,generics.GenericAPIView):
     queryset=Todo.objects.all()
     serializer_class =TodoSerializador
-
     def get(self, request, *args, **kwargs):
         return self.listar_todo(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        return self.crear_modelo_Todo(request, *args, **kwargs)
+
+
+#Taller Mixins
+
