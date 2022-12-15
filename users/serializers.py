@@ -6,3 +6,4 @@ class UserSerializer(serializers.ModelSerializer):
         model = Users
         fields='__all__'
         read_only_fields='created_at',
+         

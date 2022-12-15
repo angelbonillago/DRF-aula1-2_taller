@@ -1,20 +1,20 @@
 from rest_framework import routers
-from .api import UserMixins
+from .api import UserViewSet,UserMixins
 from django.urls import path
 from .routers import CustomRouter
 
-#router=CustomRouter()
+router=CustomRouter()
 
 router = routers.DefaultRouter()
-#router.register('',UserMixins,'users')
+router.register('rutas-personalizadas',UserViewSet,'rutas-personalizadas')
 
 
 #router.register('',UserViewSet,'users')
 #urlpatterns=router.urls
 
-urlpatterns =[
+""" urlpatterns =[
 
     path('',UserMixins.as_view(),name='prueba')
 ]
-
-urlpatterns+=router.urls
+ """
+urlpatterns = router.urls

@@ -4,8 +4,13 @@ from rest_framework import viewsets,mixins,generics
 from rest_framework.response import Response
 
 
-
-class UserViewSet(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+#Mixins para usuarios.
+class UserViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    viewsets.GenericViewSet):
     serializer_class=UserSerializer
     queryset=Users.objects.all()
     lookup_field='id'
@@ -16,8 +21,15 @@ class UserViewSet(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.Gener
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
+    def put(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
     
 
+
+#Mixin personalizado para usuarios
 class ListarUsuarios:
 
     def listar_usuario(self, request, *args, **kwargs):
