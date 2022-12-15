@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -50,11 +50,6 @@ INSTALLED_APPS = [
     #para el uso de tokenAuthenticacion -> propio de DRF
     'rest_framework.authtoken',
 ]
-
-
-
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -162,4 +157,5 @@ REST_FRAMEWORK = {
     # ...
 }
 
+AUTH_USER_MODEL = 'users.User'
 
