@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
     'django_filters',
-    'users'
+    'users',
+    #para el uso de tokenAuthenticacion -> propio de DRF
+    'rest_framework.authtoken',
 ]
 
 
@@ -121,9 +123,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Lima'
 
 USE_I18N = True
 
