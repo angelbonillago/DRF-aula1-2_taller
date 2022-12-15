@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django_filters',
     'users',
     #para el uso de tokenAuthenticacion -> propio de DRF
-    'rest_framework.authtoken',
+    #'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
