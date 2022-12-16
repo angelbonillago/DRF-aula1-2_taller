@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from .tokens import create_jwt_pair_for_user
 from django.contrib.auth import authenticate
 from rest_framework import viewsets
-#from .models import User
+from .models import User
 
 
 # Create your views here.
@@ -33,7 +33,7 @@ class Login(APIView):
         email= request.data.get("email")
         password = request.data.get("password")
 
-        user = authenticate(email,password)
+        user = authenticate(email=email,password=password)
         if user is not None:
             #crear el token
             token=create_jwt_pair_for_user(user)
@@ -56,4 +56,4 @@ class Login(APIView):
 
 class GetUser(viewsets.ReadOnlyModelViewSet):
     serializer_class=GetUserSerializador
-    #queryset=Users.objects.all()
+    queryset=User.objects.all()

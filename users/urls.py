@@ -1,28 +1,22 @@
 from rest_framework import routers
-from .api import UserViewSet,UserMixins,CustomAuthToken
 from django.urls import path
-from .routers import CustomRouter
-#
-from rest_framework.authtoken import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
-router=CustomRouter()
+from . import views
 
 router = routers.DefaultRouter()
-router.register('rutas-personalizadas',UserViewSet,'rutas-personalizadas')
+router.register('', views.GetUser) #get-> para ver los usuarios
 
-
-#router.register('',UserViewSet,'users')
-#urlpatterns=router.urls
-
-""" urlpatterns =[
-
-    path('',UserMixins.as_view(),name='prueba')
+urlpatterns = [
+    path("signup/", views.SignUpView.as_view(), name="signup"),
+    path("login/", views.Login.as_view(), name="login"),
+    path("jwt/create/", TokenObtainPairView.as_view(), name="jwt_create"),
+    path("jwt/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("jwt/verify/", TokenVerifyView.as_view(), name="token_verify"),
 ]
- """
-urlpatterns = router.urls
 
-
-urlpatterns += [
-    path('api-token-auth/', views.obtain_auth_token),
-    path('api-token-auth-personalizado/', CustomAuthToken.as_view()),
-]
+urlpatterns += router.urls
